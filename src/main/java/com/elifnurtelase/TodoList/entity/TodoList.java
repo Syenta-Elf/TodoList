@@ -15,11 +15,14 @@ public class TodoList {
     @OneToOne(cascade = CascadeType.PERSIST)
     private User user;
 
-    @OneToMany(mappedBy = "todoitem",fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "todo_item_id")
-    private List<TodoItem> todoItems;
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    private List<TodoItem> todoItems = null;
 
     public TodoList(User user) {
         this.user = user;
+    }
+
+    public TodoList() {
+
     }
 }

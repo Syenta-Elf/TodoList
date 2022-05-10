@@ -42,4 +42,7 @@ public class TodoItem implements Serializable{
         this.description = description;
         this.completed = completed;
     }
+
+    public TodoItem() {
+    }
 }

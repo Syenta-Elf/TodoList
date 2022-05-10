@@ -21,10 +21,5 @@ public class User {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "todo_list_id")
     private TodoList todoList;
-
-    public User(String name) {
-        this.name = name;
-    }
-
     
 }
