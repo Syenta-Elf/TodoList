@@ -1,5 +1,6 @@
 package com.elifnurtelase.TodoList.dto.responseDTO;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
