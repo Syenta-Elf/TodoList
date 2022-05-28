@@ -40,6 +40,7 @@ public class TodoListApplication implements CommandLineRunner {
 		.lastName("zxcv")
 		.todoList(new ArrayList<>())
 		.build();
+		
 		serviceDAL.saveUser(user1);
 		serviceDAL.saveUser(user2);
 		serviceDAL.saveUser(user3);
