@@ -1,7 +1,9 @@
 package com.elifnurtelase.TodoList.dal;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import com.elifnurtelase.TodoList.dto.requestDTO.UserRequestDTO;
 import com.elifnurtelase.TodoList.entity.Todo;
 import com.elifnurtelase.TodoList.entity.User;
 import com.elifnurtelase.TodoList.repository.TodoRepository;
@@ -26,56 +28,56 @@ public class ServiceDAL {
     }
 
     public Todo saveTodo(Todo todo) {
+        todo.setCreatedAt(LocalDate.now());
+        if(todo.getCompleted()==null){
+            todo.setCompleted(false);
+        }
         return todoRepository.save(todo);
     }
     // Save Methods <-- FINISH -->
 
     // Update Methods <-- START -->
-    public User updateUser(User user) {
-        User updatedUser = User.builder()
-                .id(user.getId())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .build();
-
-        return saveUser(updatedUser);
+    public User updateUser(Long userId,UserRequestDTO updatedUser) {
+        User user = userRepository.getById(userId);
+        user.setFirstName(updatedUser.getFirstName());
+        user.setLastName(updatedUser.getLastName());
+        return userRepository.save(user);
     }
 
-    public Todo updateTodo(Todo todo) {
-        Todo updatedTodo = Todo.builder()
-                .id(todo.getId())
-                .completed(todo.getCompleted())
-                .title(todo.getTitle())
-                .description(todo.getDescription())
-                .build();
-
-        return saveTodo(updatedTodo);
+    public Todo updateTodo(Long todoId,Todo updatedTodo) {
+        Todo t = todoRepository.getById(todoId);
+        t.setTitle(updatedTodo.getTitle());
+        t.setDescription(updatedTodo.getDescription());
+        t.setCompleted(updatedTodo.getCompleted());
+        return saveTodo(t);
     }
     // Update Methods <-- FINISH -->
 
     // Delete Methods <-- START -->
-    public User deleteUser(User user) {
-        userRepository.delete(user);
-        return user;
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
     }
 
-    public Todo deleteTodo(Todo todo) {
-        todoRepository.delete(todo);
-        return todo;
+    public void deleteTodo(Long todoId) {
+        todoRepository.deleteById(todoId);
     }
     // Delete Methods <-- FINISH -->
 
     // FindAll Methods <-- START -->
+    public User findUserById(Long userId) {
+        return userRepository.getById(userId);
+    }
+
     public List<User> findUsers() {
         return userRepository.findAll();
     }
 
-    public List<Todo> findTodos(){
+    public List<Todo> findTodos() {
         return todoRepository.findAll();
     }
 
-    public List<Todo> findUserTodos(Long userId){
-        
+    public List<Todo> findUserTodos(Long userId) {
+
         return userRepository.getById(userId).getTodoList();
     }
     // Find Methods <-- FINISH -->
