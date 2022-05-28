@@ -1,6 +1,7 @@
 package com.elifnurtelase.TodoList.entity;
 
 import java.util.List;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -13,7 +14,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 @Entity
 @Data
 @Getter
@@ -23,8 +23,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "GEN_USER")
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String firstName;
@@ -32,6 +31,7 @@ public class User {
     
     @Column
     @ElementCollection(targetClass = Todo.class)
+    @CollectionTable(name="todo_items")
     private List<Todo> todoList;
 
 }
