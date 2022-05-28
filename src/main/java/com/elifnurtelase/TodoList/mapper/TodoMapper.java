@@ -33,6 +33,7 @@ public class TodoMapper {
     public TodoResponseDTO todoResponseDTO(Todo todo){
 
         TodoResponseDTO todoResponseDTO = TodoResponseDTO.builder()
+        .id(todo.getId())
         .title(todo.getTitle())
         .description(todo.getDescription())
         .completed(todo.getCompleted())

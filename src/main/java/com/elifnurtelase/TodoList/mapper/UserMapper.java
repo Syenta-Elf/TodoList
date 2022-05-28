@@ -31,6 +31,7 @@ public class UserMapper {
 
     public UserResponseDTO toUserResponseDTO(User user){
         UserResponseDTO userResponseDTO = UserResponseDTO.builder()
+        .id(user.getId())
         .firstName(user.getFirstName())
         .todoList(user.getTodoList().stream().map(todo->todoMapper.todoResponseDTO(todo)).toList())
         .build();
