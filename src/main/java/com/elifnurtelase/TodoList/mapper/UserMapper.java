@@ -1,6 +1,7 @@
 package com.elifnurtelase.TodoList.mapper;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import com.elifnurtelase.TodoList.dto.requestDTO.UserRequestDTO;
 import com.elifnurtelase.TodoList.dto.responseDTO.UserResponseDTO;
@@ -33,7 +34,7 @@ public class UserMapper {
         UserResponseDTO userResponseDTO = UserResponseDTO.builder()
         .id(user.getId())
         .firstName(user.getFirstName())
-        .todoList(user.getTodoList().stream().map(todo->todoMapper.todoResponseDTO(todo)).toList())
+        .todoList(user.getTodoList().stream().map(todo->todoMapper.todoResponseDTO(todo)).collect(Collectors.toList()))
         .build();
 
         return userResponseDTO;

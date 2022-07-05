@@ -1,6 +1,7 @@
 package com.elifnurtelase.TodoList.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.elifnurtelase.TodoList.dal.ServiceDAL;
 import com.elifnurtelase.TodoList.dto.requestDTO.UserRequestDTO;
@@ -35,7 +36,7 @@ public class UserService {
 
     public List<UserResponseDTO> findAllUsers(){
         return serviceDAL.findUsers().stream()
-        .map(user->userMapper.toUserResponseDTO(user)).toList();
+        .map(user->userMapper.toUserResponseDTO(user)).collect(Collectors.toList());
     }
     
     public UserResponseDTO updateUserById(UserRequestDTO userRequestDTO,Long userId){

@@ -1,6 +1,7 @@
 package com.elifnurtelase.TodoList.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.elifnurtelase.TodoList.dal.ServiceDAL;
 import com.elifnurtelase.TodoList.dto.responseDTO.TodoResponseDTO;
@@ -60,7 +61,7 @@ public class UserTodoService {
 
     public List<TodoResponseDTO> findUserTodoItems(Long userId){
         User user = serviceDAL.findUserById(userId);
-        List<TodoResponseDTO> todoList = user.getTodoList().stream().map(todo->todoMapper.todoResponseDTO(todo)).toList();
+        List<TodoResponseDTO> todoList = user.getTodoList().stream().map(todo->todoMapper.todoResponseDTO(todo)).collect(Collectors.toList());
         return todoList;
     }
 }
